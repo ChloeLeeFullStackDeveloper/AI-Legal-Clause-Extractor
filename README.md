@@ -1,4 +1,3 @@
-# AI-Legal-Clause-Extractor
 # ⚖️ AI Legal Clause Extractor
 
 The **AI Legal Clause Extractor** is a web application that allows users to upload legal documents (PDFs), automatically extract key clauses (e.g., Termination, Confidentiality, Governing Law), and display them in an organized and readable format.
