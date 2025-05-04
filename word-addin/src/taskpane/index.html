@@ -1,23 +1,19 @@
-import * as React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./components/App";
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Legal Clause Extractor</title>
 
-/* global document, Office */
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
 
-let isOfficeInitialized = false;
+    <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
+    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"/>
+</head>
 
-const render = (Component) => {
-  const container = document.getElementById("container");
-  const root = createRoot(container);
-  root.render(<Component />);
-};
-
-/* Render application after Office initializes */
-Office.onReady(() => {
-  isOfficeInitialized = true;
-  render(App);
-});
-
-if (!isOfficeInitialized) {
-  render(App);
-}
+<body class="ms-font-m ms-Fabric">
+    <div id="container"></div>
+</body>
+</html>
