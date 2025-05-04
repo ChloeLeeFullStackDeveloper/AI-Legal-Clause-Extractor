@@ -93,4 +93,29 @@ router.post("/", (req: Request, res: Response) => {
   });
 });
 
+router.post("/extract", function (req: Request, res: Response) {
+  (async function () {
+    try {
+      const { text } = req.body;
+
+      if (!text) {
+        return res.status(400).json({ message: "No text provided" });
+      }
+
+      const extractedClauses = await extractClauses(text);
+
+      res.status(200).json({
+        message: "Clauses extracted successfully",
+        clauses: extractedClauses.clauses,
+      });
+    } catch (err: any) {
+      console.error("Text extraction error:", err);
+      return res.status(500).json({
+        message: "Failed to extract clauses",
+        error: err.message || String(err),
+      });
+    }
+  })();
+});
+
 export default router;

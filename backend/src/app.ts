@@ -5,7 +5,12 @@ import uploadRoutes from './routes/upload.routes';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // This is needed for development, but should be restricted in production
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 app.use('/api/upload', uploadRoutes);
