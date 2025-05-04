@@ -1,0 +1,23 @@
+import * as React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./components/App";
+
+/* global document, Office */
+
+let isOfficeInitialized = false;
+
+const render = (Component) => {
+  const container = document.getElementById("container");
+  const root = createRoot(container);
+  root.render(<Component />);
+};
+
+/* Render application after Office initializes */
+Office.onReady(() => {
+  isOfficeInitialized = true;
+  render(App);
+});
+
+if (!isOfficeInitialized) {
+  render(App);
+}
