@@ -1,102 +1,164 @@
-# ⚖️ AI Legal Clause Extractor
+# AI Legal Clause Extractor
 
-The **AI Legal Clause Extractor** is a web application that allows users to upload legal documents (PDFs), automatically extract key clauses (e.g., Termination, Confidentiality, Governing Law), and display them in an organized and readable format.
-
-This tool is designed to help legal professionals, paralegals, and researchers save time by leveraging OpenAI's GPT-4 or GPT-3.5 to understand and extract legally significant sections from complex documents.
-
----
+A powerful tool that leverages AI to automatically extract key legal clauses from legal documents. The system analyzes documents to identify and extract important clauses such as Termination, Confidentiality, Governing Law, and more.
 
 ## 🚀 Features
 
-- 🔼 Upload PDF legal documents
-- 🧠 Uses OpenAI to extract key clauses
-- 🧾 Displays extracted clauses in a clean UI
-- ⚡ Built with full-stack TypeScript (React + Express)
-- 💬 Easily extendable to support summaries or clause classification
+* 📄 Extract key legal clauses from documents
+* 🧠 Powered by OpenAI's advanced language models
+* 📱 Multiple interfaces: Web Application and Microsoft Word Add-in
+* 📋 Easily view and navigate through extracted clauses
+* 🔍 Highlight clauses directly in Word documents
 
----
+## 📋 Project Overview
 
-## 🛠 Tech Stack
+This project consists of three main components:
 
-| Part       | Stack                     |
-|------------|---------------------------|
-| Frontend   | React + TypeScript        |
-| Backend    | Node.js + Express + TS    |
-| AI         | OpenAI API (GPT-4 or 3.5) |
-| File Parsing | `pdf-parse` (Node)       |
+1. **Backend API**: Node.js/Express server that processes documents and communicates with OpenAI
+2. **Web Frontend**: React-based web application for uploading and analyzing documents
+3. **Word Add-in**: Microsoft Word integration for analyzing documents directly within Word
 
----
+## 🔧 Technical Stack
 
-## 📁 Folder Structure
+### Backend
+- Node.js & Express
+- TypeScript
+- OpenAI API integration
+- PDF parsing (`pdf-parse`)
+
+### Web Frontend
+- React
+- TypeScript
+- Axios for API communication
+
+### Word Add-in
+- Office.js API
+- React
+- TypeScript
+- Webpack
+
+## 📁 Project Structure
 
 ```
 ai-legal-clause-extractor/
-├── backend/
+├── backend/                # Node.js backend API
 │   ├── src/
-│   │   ├── routes/
-│   │   │   └── upload.routes.ts
-│   │   ├── utils/
-│   │   │   └── extractText.ts
-│   │   └── app.ts
-│   └── uploads/ (PDF storage)
+│   │   ├── config/         # Configuration files
+│   │   ├── routes/         # API route handlers
+│   │   ├── utils/          # Utility functions
+│   │   └── app.ts          # Express application
+│   ├── uploads/            # Temporary storage for uploaded files
+│   └── .env                # Environment variables
 │
-├── frontend/
+├── web-frontend/           # React web application (optional)
+│   ├── public/
 │   └── src/
 │       ├── components/
-│       │   ├── DocumentUpload.tsx
-│       │   └── ExtractedClauses.tsx
-│       └── services/api.ts
+│       └── services/
+│
+└── word-addin/             # Microsoft Word Add-in
+    ├── src/
+    │   ├── taskpane/       # Add-in taskpane components
+    │   │   ├── components/ # React components
+    │   │   └── helpers/    # Helper functions
+    │   └── test.ts         # TypeScript test file
+    ├── assets/             # Static assets like icons
+    ├── manifest.xml        # Word Add-in manifest
+    ├── tsconfig.json       # TypeScript configuration
+    └── webpack.config.js   # Webpack configuration
 ```
 
----
+## 🚀 Getting Started
 
-## 🧠 How It Works
+### Backend Setup
 
-1. **User uploads a PDF** via the frontend
-2. **Backend parses** the PDF text using `pdf-parse`
-3. The raw text is **sent to OpenAI** with a prompt like:
-   > "Extract the following clauses from this contract: Termination, Confidentiality, Governing Law, Dispute Resolution..."
-4. The AI's structured response is sent back to the frontend
-5. Clauses are shown in expandable cards (accordion-style)
+1. Navigate to the backend directory:
+   ```
+   cd backend
+   ```
 
----
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-## 🔐 OpenAI Setup
-1. Get your API key from https://platform.openai.com
-2. Add a `.env` file in the `backend/` folder:
+3. Create a `.env` file with your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   ```
 
-```
-OPENAI_API_KEY=your-key-here
-PORT=3001
-```
+4. Start the development server:
+   ```
+   npm run dev
+   ```
 
----
+The backend will be available at http://localhost:3001.
 
-## 📦 Install & Run
+### Word Add-in Setup
 
-### Backend:
-```bash
-cd backend
-npm install
-npm run dev
-```
+1. Navigate to the Word Add-in directory:
+   ```
+   cd word-addin
+   ```
 
-### Frontend:
-```bash
-cd frontend
-npm install
-npm start
-```
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
----
+3. Start the development server:
+   ```
+   npm start
+   ```
 
-## ✨ Future Enhancements
-- Highlight source text in full document
-- Export clause results to Word or PDF
-- Add clause classification or risk score
-- Support for DOCX and multi-page scans
+4. Sideload the Add-in in Word:
+   - Open Word
+   - Go to Insert > Add-ins > My Add-ins > Upload My Add-in
+   - Browse to the `manifest.xml` file in the `word-addin/dist` directory
 
----
+## 📝 Usage
+
+### Using the Web Interface
+
+1. Navigate to the web application
+2. Upload a legal document in PDF, DOC, or DOCX format
+3. Wait for processing
+4. Review extracted clauses, organized by type
+
+### Using the Word Add-in
+
+1. Open a legal document in Microsoft Word
+2. Launch the Legal Clause Extractor add-in from the ribbon
+3. Click "Extract Clauses" in the task pane
+4. Review extracted clauses
+5. Use the "Highlight in Document" feature to see clauses in context
+
+## 🧩 API Endpoints
+
+- `POST /api/upload`: Upload and process a document file
+- `POST /api/extract`: Process document text (used by Word Add-in)
+
+## 🛠️ Development
+
+### Backend Development
+
+Extend the backend by:
+- Adding support for additional file types
+- Implementing more sophisticated clause detection
+- Adding database storage for processed documents
+
+### Add-in Development
+
+Enhance the Word Add-in by:
+- Adding clause categorization
+- Implementing clause comparison against templates
+- Adding export functionality
 
 ## 📄 License
-MIT
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgements
+
+- OpenAI for providing the AI capabilities
+- Microsoft for the Office Add-ins platform
