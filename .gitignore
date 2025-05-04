@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+
+# Environment files
+.env
+
+# Uploaded files
+uploads/
